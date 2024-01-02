@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const _=require("lodash")
+const _=require("lodash");
+const http=require("http");
 
 const app = express();
+const port=process.env.PORT || 3000;
+const server=http.createServer(app);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
@@ -120,4 +123,4 @@ app.get("/:customListName", async (req, res) => {
     }
 });
 
-app.listen(process.ENV.PORT || 3000, () => console.log("Server is started..."));
+server.listen(port , () => console.log("Server is started..."));
