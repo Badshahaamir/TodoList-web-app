@@ -120,4 +120,4 @@ app.get("/:customListName", async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Server is started..."));
+app.listen(process.ENV.PORT || 3000, () => console.log("Server is started..."));
