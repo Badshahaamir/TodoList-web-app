@@ -12,8 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://badshahaamir78:aamir%40123@aamirclustor.8kgddhh.mongodb.net/todolistdb");
+try {
+ mongoose.connect("mongodb+srv://badshahaamir78:aamir%40123@aamirclustor.8kgddhh.mongodb.net/todolistdb");
+} catch (error) {
+    handleError(error);
+}
 
+mongoose.connection.on('error', err => {
+    logError("connection error");
+});
 const itemSchema = new mongoose.Schema({
     name: String
 })
